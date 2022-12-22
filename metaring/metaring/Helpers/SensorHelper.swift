@@ -32,7 +32,7 @@ extension MetaringCoreDataManager {
     func groupByDay() -> [SensorModel] {
         let request: NSFetchRequest<Sensor> = Sensor.fetchRequest()
         do {
-            var res = try viewContext.fetch(request).map(SensorModel.init).sorted { $0.createTime < $1.createTime }
+            let res = try viewContext.fetch(request).map(SensorModel.init).sorted { $0.createTime < $1.createTime }
             return res
         } catch {
             return []

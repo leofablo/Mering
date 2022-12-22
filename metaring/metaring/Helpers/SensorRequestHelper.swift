@@ -18,14 +18,14 @@ struct AntaresSensorRequest {
     var cseId = "antares-cse"
     var cseName = "antares-id"
 //    var applicationName = "SmartIdea"
-    var applicationName = "monitoring-waduk"
+    var applicationName = "SeiJagoWaterQuality"
 //    var deviceName = "SensorTest"
-    var deviceName = "esp32"
+    var deviceName = "waterQualitySensor"
     
 //    var accessId = "6cd5e5cc78bbed06"
 //    var accessPassword = "faefeda74389bcb0"
-    var accessId = "a25252e8dfd62257"
-    var accessPassword = "4f90f1dd483f1748"
+    var accessId = "f184b703e2d42c12"
+    var accessPassword = "9e0852ac7001c2c8"
     
     func setupGetRequest() {
         
@@ -62,7 +62,9 @@ struct AntaresSensorRequest {
         }
         return result
     }
-    
+    //https://platform.antares.id:8443/~/antares-cse/CAEe9ADXdO2S6mJfvh5
+//f184b703e2d42c12:9e0852ac7001c2c8 \(accessId):\(accessPassword)
+//    "\(domainUrl):\(port)/~/\(cseId)/\(cseName)/\(applicationName)/\(deviceName)/la"
     func getLastData() -> RequestSensorModel {
         var request = URLRequest(url: URL(string: "\(domainUrl):\(port)/~/\(cseId)/\(cseName)/\(applicationName)/\(deviceName)/la")!, timeoutInterval: Double.infinity)
         request.addValue("\(accessId):\(accessPassword)", forHTTPHeaderField: "X-M2M-Origin")
@@ -78,8 +80,8 @@ struct AntaresSensorRequest {
                 return
             }
             let stringData = String(data: data, encoding: .utf8)!
-            var formatResult = setupFormatResult(stringData: stringData)
-            var formatSensorResult = setupFormatSensorResult(sensorData: formatResult["con"]! as AnyObject)
+            let formatResult = setupFormatResult(stringData: stringData)
+            let formatSensorResult = setupFormatSensorResult(sensorData: formatResult["con"]! as AnyObject)
             requestSensor.con = formatSensorResult as! [String : Any]
             requestSensor.ct = formatResult["ct"] as! String
             requestSensor.lt = formatResult["lt"] as! String
@@ -88,10 +90,14 @@ struct AntaresSensorRequest {
             requestSensor.st = formatResult["st"] as! Int
             requestSensor.ty = formatResult["ty"] as! Int
             requestSensor.status = true
+            
             semaphore.signal()
         }
         task.resume()
         semaphore.wait()
+        
+        print(requestSensor)
+        
         return requestSensor
     }
 }

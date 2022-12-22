@@ -60,7 +60,7 @@ extension Date {
     }
     
     static func getDayNames(dateString: String) -> String {
-        var dayName = ""
+        let dayName = ""
         let dateString = "2018-12-24"
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

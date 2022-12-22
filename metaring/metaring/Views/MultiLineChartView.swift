@@ -25,7 +25,7 @@ struct MultiLineChartView : UIViewRepresentable {
     }
 
     func createChart(chart: LineChartView) -> LineChartView{
-        chart.chartDescription!.enabled = false
+        chart.chartDescription.enabled = false
         chart.xAxis.drawGridLinesEnabled = true
 //        chart.borderLineWidth = 1
         chart.xAxis.drawLabelsEnabled = true
@@ -40,7 +40,7 @@ struct MultiLineChartView : UIViewRepresentable {
         chart.xAxis.forceLabelsEnabled = true
         chart.xAxis.granularityEnabled = true
         chart.xAxis.granularity = 0
-        chart.xAxis.valueFormatter = CustomChartFormatter(labels: labels)
+        chart.xAxis.valueFormatter = CustomChartFormatter(labels: labels) as any AxisValueFormatter
         chart.data = addData()
         return chart
     }
@@ -68,7 +68,7 @@ struct MultiLineChartView : UIViewRepresentable {
         dataSet.mode = .linear
         dataSet.circleRadius = 1
         dataSet.circleHoleColor = UIColor(Color(#colorLiteral(red: 0.003921568627, green: 0.231372549, blue: 0.431372549, alpha: 1)))
-        dataSet.fill = Fill.fillWithColor(fillColor)
+        dataSet.fill = ColorFill(color: fillColor)
         dataSet.drawFilledEnabled = false
         dataSet.setCircleColor(UIColor.clear)
         dataSet.lineWidth = 1.5
@@ -79,7 +79,7 @@ struct MultiLineChartView : UIViewRepresentable {
 
 }
 
-class CustomChartFormatter: NSObject, IAxisValueFormatter {
+class CustomChartFormatter: NSObject, AxisValueFormatter {
     var labels: [String]
     init(labels: [String]) {
         self.labels = labels
