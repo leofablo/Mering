@@ -32,6 +32,7 @@ struct MultiLineChartView : UIViewRepresentable {
         chart.xAxis.drawAxisLineEnabled = true
         chart.xAxis.labelPosition = .bottom
         chart.leftAxis.labelPosition = .outsideChart
+        chart.xAxis.labelRotationAngle = CGFloat(315)
         chart.rightAxis.enabled = false
 //        chart.drawBordersEnabled = true
         chart.drawMarkers = true
@@ -39,7 +40,7 @@ struct MultiLineChartView : UIViewRepresentable {
         chart.xAxis.labelCount = labels.count
         chart.xAxis.forceLabelsEnabled = true
         chart.xAxis.granularityEnabled = true
-        chart.xAxis.granularity = 0
+        chart.xAxis.granularity = 1.0
         chart.xAxis.valueFormatter = CustomChartFormatter(labels: labels) as any AxisValueFormatter
         chart.data = addData()
         return chart

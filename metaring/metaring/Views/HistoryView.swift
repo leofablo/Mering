@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct HistoryView: View {
     @State private var filterBy = 0
@@ -15,6 +16,56 @@ struct HistoryView: View {
     @Binding var waterPHActive: Bool
     @Binding var waterTurbidityActive: Bool
     @Binding var waterDebitActive: Bool
+    
+    
+    
+    let labels = ["08.00", "09.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00", "16.00", "17.00", "18.00", "19.00", "20.00", "21.00", "22.00", "23.00"]
+    let entries1: [ChartDataEntry] = [
+//        ChartDataEntry(x: 1, y: 1),
+//        ChartDataEntry(x: 2, y: 2),
+//        ChartDataEntry(x: 3, y: 3),
+//        ChartDataEntry(x: 4, y: 5),
+//        ChartDataEntry(x: 5, y: 2),
+//        ChartDataEntry(x: 6, y: 1),
+//        ChartDataEntry(x: 7, y: 3)
+    ]
+    let entries2: [ChartDataEntry] = [
+//        ChartDataEntry(x: 1, y: 2),
+//        ChartDataEntry(x: 2, y: 3),
+//        ChartDataEntry(x: 3, y: 1),
+//        ChartDataEntry(x: 4, y: 4),
+//        ChartDataEntry(x: 5, y: 2),
+//        ChartDataEntry(x: 6, y: 3),
+//        ChartDataEntry(x: 7, y: 2)
+    ]
+    let entries3: [ChartDataEntry] = [
+//        ChartDataEntry(x: 1, y: 2),
+//        ChartDataEntry(x: 2, y: 3),
+//        ChartDataEntry(x: 3, y: 2),
+//        ChartDataEntry(x: 4, y: 4),
+//        ChartDataEntry(x: 5, y: 5),
+//        ChartDataEntry(x: 6, y: 3),
+//        ChartDataEntry(x: 7, y: 1)
+        
+    ]
+    let entries4: [ChartDataEntry] = [
+        ChartDataEntry(x: 1, y: 3),
+        ChartDataEntry(x: 2, y: 1),
+        ChartDataEntry(x: 3, y: 2),
+        ChartDataEntry(x: 4, y: 1),
+        ChartDataEntry(x: 5, y: 3),
+        ChartDataEntry(x: 6, y: 2),
+        ChartDataEntry(x: 7, y: 1),
+        ChartDataEntry(x: 7, y: 1),
+        ChartDataEntry(x: 7, y: 1),
+        ChartDataEntry(x: 7, y: 1),
+        ChartDataEntry(x: 7, y: 1),
+        ChartDataEntry(x: 7, y: 1),
+        ChartDataEntry(x: 7, y: 1),
+        ChartDataEntry(x: 7, y: 1),
+        ChartDataEntry(x: 7, y: 1),
+        ChartDataEntry(x: 7, y: 1),
+    ]
     
     var body: some View {
         GeometryReader(content: { geometry in
@@ -92,7 +143,12 @@ struct HistoryView: View {
                             Text("Year").tag(2)
                         }.pickerStyle(.segmented)
                     }.padding()
-                    Spacer()
+                    VStack {
+                        DashboardChartView().environmentObject(dashboard)
+                            .frame(height: 400)
+                        
+                    }
+//                    Spacer()
                 }
                 .navigationTitle("History")
             .navigationBarTitleDisplayMode(.inline)

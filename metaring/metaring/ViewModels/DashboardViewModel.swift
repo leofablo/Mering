@@ -28,7 +28,7 @@ class DashboardViewModel: ObservableObject {
     
     @Published var requestSensor: [RequestSensorModel] = []
     
-    @Published var labelEntries: [String] = []
+    @Published var labelEntries: [String] = ["06.00", "07.00", "08.00", "09.00", "10.00", "11.00", "12.00", "15.00"]
     @Published var metalContentEntries: [ChartDataEntry] = []
     @Published var waterPHEntries: [ChartDataEntry] = []
     @Published var waterTurbidityEntries: [ChartDataEntry] = []
