@@ -96,7 +96,7 @@ struct AntaresSensorRequest {
         task.resume()
         semaphore.wait()
         
-        print(requestSensor)
+//        print(requestSensor)
         
         return requestSensor
     }
