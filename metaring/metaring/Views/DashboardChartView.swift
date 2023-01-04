@@ -57,10 +57,14 @@ struct DashboardChartView: View {
         VStack {
             MultiLineChartView(
                 
-                entries1: entries1,
-                entries2: entries2,
-                entries3: entries3,
-                entries4: entries4,
+                entries1: dashboard.metalContentEntries,
+                entries2: dashboard.waterPHEntries,
+                entries3: dashboard.waterTurbidityEntries,
+                entries4: dashboard.waterDebitEntries,
+//                entries1: entries1,
+//                entries2: entries2,
+//                entries3: entries3,
+//                entries4: entries4,
                 labels: dashboard.labelEntries)
         }
     }
