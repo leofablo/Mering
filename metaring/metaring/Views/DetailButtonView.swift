@@ -43,9 +43,3 @@ struct DetailButtonView: View {
         }.padding(.horizontal)
     }
 }
-
-//struct DetailButtonView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailButtonView()
-//    }
-//}

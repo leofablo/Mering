@@ -135,20 +135,12 @@ struct HistoryView: View {
                     .frame(width: geometry.self.size.width, height: 10)
                     .background(Color.clear)
                     
-                    HStack {
-                        Picker("Filter", selection: $filterBy) {
-                            Text("Day").tag(0)
-                            Text("Week").tag(1)
-                            Text("Month").tag(2)
-                            Text("Year").tag(2)
-                        }.pickerStyle(.segmented)
-                    }.padding()
                     VStack {
                         DashboardChartView().environmentObject(dashboard)
                             .frame(height: 400)
                         
                     }
-//                    Spacer()
+                    
                 }
                 .navigationTitle("History")
             .navigationBarTitleDisplayMode(.inline)
@@ -156,9 +148,3 @@ struct HistoryView: View {
         })
     }
 }
-
-//struct HistoryView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HistoryView()
-//    }
-//}

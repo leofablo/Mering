@@ -69,12 +69,11 @@ extension Date {
         }
 
         formatter.dateFormat = "yyyy"
-        let year = formatter.string(from: date)
+        _ = formatter.string(from: date)
         formatter.dateFormat = "MM"
-        let month = formatter.string(from: date)
+        _ = formatter.string(from: date)
         formatter.dateFormat = "dd"
-        let day = formatter.string(from: date)
-        print(year, month, day) // 2018 12 24
+        _ = formatter.string(from: date)
         
         return dayName
     }

@@ -7,16 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08CD56002967BE5C009C09D9 /* unused.rb in Resources */ = {isa = PBXBuildFile; fileRef = 08CD55FF2967BE5C009C09D9 /* unused.rb */; };
 		FA191D5228390786006AA2CF /* DashboardChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA191D5128390786006AA2CF /* DashboardChartView.swift */; };
 		FA3E77D32854B91F00520712 /* DetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3E77D22854B91F00520712 /* DetailButtonView.swift */; };
 		FA3E77D52855BC7500520712 /* PullRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3E77D42855BC7500520712 /* PullRefreshView.swift */; };
-		FAB8E758284379250063FBC9 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB8E757284379250063FBC9 /* DetailsView.swift */; };
 		FABAA675283904F600A36936 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = FABAA674283904F600A36936 /* Charts */; };
 		FADA7F112838C39500916152 /* metaringApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADA7F102838C39500916152 /* metaringApp.swift */; };
-		FADA7F132838C39500916152 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADA7F122838C39500916152 /* ContentView.swift */; };
 		FADA7F152838C39A00916152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FADA7F142838C39A00916152 /* Assets.xcassets */; };
 		FADA7F182838C39A00916152 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FADA7F172838C39A00916152 /* Preview Assets.xcassets */; };
-		FADA7F1A2838C39A00916152 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADA7F192838C39A00916152 /* Persistence.swift */; };
 		FADA7F1D2838C39A00916152 /* metaring.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FADA7F1B2838C39A00916152 /* metaring.xcdatamodeld */; };
 		FADA7F272838C39A00916152 /* metaringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADA7F262838C39A00916152 /* metaringTests.swift */; };
 		FADA7F312838C39A00916152 /* metaringUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADA7F302838C39A00916152 /* metaringUITests.swift */; };
@@ -53,16 +51,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08CD55FF2967BE5C009C09D9 /* unused.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unused.rb; sourceTree = "<group>"; };
 		FA191D5128390786006AA2CF /* DashboardChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardChartView.swift; sourceTree = "<group>"; };
 		FA3E77D22854B91F00520712 /* DetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailButtonView.swift; sourceTree = "<group>"; };
 		FA3E77D42855BC7500520712 /* PullRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRefreshView.swift; sourceTree = "<group>"; };
-		FAB8E757284379250063FBC9 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		FADA7F0D2838C39500916152 /* metaring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = metaring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADA7F102838C39500916152 /* metaringApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = metaringApp.swift; sourceTree = "<group>"; };
-		FADA7F122838C39500916152 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FADA7F142838C39A00916152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FADA7F172838C39A00916152 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		FADA7F192838C39A00916152 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		FADA7F1C2838C39A00916152 /* metaring.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = metaring.xcdatamodel; sourceTree = "<group>"; };
 		FADA7F222838C39A00916152 /* metaringTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = metaringTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADA7F262838C39A00916152 /* metaringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = metaringTests.swift; sourceTree = "<group>"; };
@@ -137,11 +133,10 @@
 				FADA7F7F2838D9BC00916152 /* Helpers */,
 				FADA7F7A2838D7F500916152 /* Views */,
 				FADA7F102838C39500916152 /* metaringApp.swift */,
-				FADA7F122838C39500916152 /* ContentView.swift */,
 				FADA7F142838C39A00916152 /* Assets.xcassets */,
-				FADA7F192838C39A00916152 /* Persistence.swift */,
 				FADA7F1B2838C39A00916152 /* metaring.xcdatamodeld */,
 				FADA7F162838C39A00916152 /* Preview Content */,
+				08CD55FF2967BE5C009C09D9 /* unused.rb */,
 			);
 			path = metaring;
 			sourceTree = "<group>";
@@ -181,7 +176,6 @@
 				FADA7F922838FD9D00916152 /* MultiLineChartView.swift */,
 				FAFE5768283A5799004F151D /* TabBarView.swift */,
 				FAFE576A283A57FC004F151D /* HistoryView.swift */,
-				FAB8E757284379250063FBC9 /* DetailsView.swift */,
 				FA3E77D22854B91F00520712 /* DetailButtonView.swift */,
 				FA3E77D42855BC7500520712 /* PullRefreshView.swift */,
 			);
@@ -225,6 +219,7 @@
 				FADA7F092838C39500916152 /* Sources */,
 				FADA7F0A2838C39500916152 /* Frameworks */,
 				FADA7F0B2838C39500916152 /* Resources */,
+				08CD56012967BE99009C09D9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -328,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08CD56002967BE5C009C09D9 /* unused.rb in Resources */,
 				FADA7F182838C39A00916152 /* Preview Assets.xcassets in Resources */,
 				FADA7F152838C39A00916152 /* Assets.xcassets in Resources */,
 			);
@@ -371,6 +367,24 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		08CD56012967BE99009C09D9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "file=\"unused.rb\"\nif [ -f \"$file\" ]\nthen\necho \"$file found.\"\nruby unused.rb xcode\nelse\necho \"unused.rb doesn't exist\"\nfi\n";
 		};
 		A3FAA4A45028A88B0CF9A433 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -424,14 +438,11 @@
 				FAFE576D283A6B8A004F151D /* SensorRequestHelper.swift in Sources */,
 				FADA7F932838FD9D00916152 /* MultiLineChartView.swift in Sources */,
 				FA3E77D32854B91F00520712 /* DetailButtonView.swift in Sources */,
-				FADA7F1A2838C39A00916152 /* Persistence.swift in Sources */,
 				FA3E77D52855BC7500520712 /* PullRefreshView.swift in Sources */,
 				FADA7F812838D9D000916152 /* AssetHelper.swift in Sources */,
 				FADA7F7C2838D81400916152 /* DashboardView.swift in Sources */,
 				FADA7F7E2838D88500916152 /* DashboardButtonView.swift in Sources */,
-				FADA7F132838C39500916152 /* ContentView.swift in Sources */,
 				FAFE576B283A57FC004F151D /* HistoryView.swift in Sources */,
-				FAB8E758284379250063FBC9 /* DetailsView.swift in Sources */,
 				FAFE5764283A4C90004F151D /* SensorHelper.swift in Sources */,
 				FAFE5762283A49B6004F151D /* ModelHelper.swift in Sources */,
 				FAFE5760283A3872004F151D /* SensorModel.swift in Sources */,

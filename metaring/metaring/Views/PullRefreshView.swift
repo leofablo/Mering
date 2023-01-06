@@ -34,13 +34,13 @@ struct PullRefreshView: View {
                 if needRefresh || isRefreshing {
                     ProgressView()
                 } else {
-//                    Image(systemName: "arrow.clockwise")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: 20, height: 20)
-//                        .foregroundColor(.gray)
-//                    Text("Refresh")
-//                        .foregroundColor(.gray)
+                    Image(systemName: "arrow.clockwise")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.gray)
+                    Text("Refresh")
+                        .foregroundColor(.gray)
                 }
                 Spacer()
             }

@@ -37,13 +37,5 @@ extension MetaringCoreDataManager {
         } catch {
             return []
         }
-        
-//        func group(_ result : FetchedResults<Songs>)-> [[Songs]] {
-
-//            var x = Dictionary(grouping: result) { $0.section! }
-//                .sorted(by: {$0.key < $1.key})
-//                .map {$0.value}
-//            print(x, "XXX")
-//        }
     }
 }

@@ -86,6 +86,6 @@ class CustomChartFormatter: NSObject, AxisValueFormatter {
         self.labels = labels
     }
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        return labels[Int(value-1)]
+        return labels[Int(value - 1)]
     }
 }
