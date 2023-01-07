@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08CA5E0D296946A90071ADDC /* RequestAllSensorDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA5E0C296946A90071ADDC /* RequestAllSensorDataHelper.swift */; };
+		08CA5E112969532D0071ADDC /* AbsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA5E102969532D0071ADDC /* AbsResponseModel.swift */; };
+		08CA5E13296983F50071ADDC /* HistoryChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA5E12296983F50071ADDC /* HistoryChartView.swift */; };
+		08CA5E15296988BC0071ADDC /* OneLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA5E14296988BC0071ADDC /* OneLineChartView.swift */; };
 		08CD56002967BE5C009C09D9 /* unused.rb in Resources */ = {isa = PBXBuildFile; fileRef = 08CD55FF2967BE5C009C09D9 /* unused.rb */; };
 		FA191D5228390786006AA2CF /* DashboardChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA191D5128390786006AA2CF /* DashboardChartView.swift */; };
 		FA3E77D32854B91F00520712 /* DetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3E77D22854B91F00520712 /* DetailButtonView.swift */; };
@@ -51,6 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		08CA5E0C296946A90071ADDC /* RequestAllSensorDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAllSensorDataHelper.swift; sourceTree = "<group>"; };
+		08CA5E102969532D0071ADDC /* AbsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsResponseModel.swift; sourceTree = "<group>"; };
+		08CA5E12296983F50071ADDC /* HistoryChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryChartView.swift; sourceTree = "<group>"; };
+		08CA5E14296988BC0071ADDC /* OneLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineChartView.swift; sourceTree = "<group>"; };
 		08CD55FF2967BE5C009C09D9 /* unused.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = unused.rb; sourceTree = "<group>"; };
 		FA191D5128390786006AA2CF /* DashboardChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardChartView.swift; sourceTree = "<group>"; };
 		FA3E77D22854B91F00520712 /* DetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailButtonView.swift; sourceTree = "<group>"; };
@@ -178,6 +186,8 @@
 				FAFE576A283A57FC004F151D /* HistoryView.swift */,
 				FA3E77D22854B91F00520712 /* DetailButtonView.swift */,
 				FA3E77D42855BC7500520712 /* PullRefreshView.swift */,
+				08CA5E12296983F50071ADDC /* HistoryChartView.swift */,
+				08CA5E14296988BC0071ADDC /* OneLineChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -189,6 +199,7 @@
 				FAFE5761283A49B6004F151D /* ModelHelper.swift */,
 				FAFE5763283A4C90004F151D /* SensorHelper.swift */,
 				FAFE576C283A6B8A004F151D /* SensorRequestHelper.swift */,
+				08CA5E0C296946A90071ADDC /* RequestAllSensorDataHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -197,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				FAFE575F283A3872004F151D /* SensorModel.swift */,
+				08CA5E102969532D0071ADDC /* AbsResponseModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -432,9 +444,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08CA5E15296988BC0071ADDC /* OneLineChartView.swift in Sources */,
+				08CA5E13296983F50071ADDC /* HistoryChartView.swift in Sources */,
 				FADA7F832838EFB700916152 /* DashboardHeaderView.swift in Sources */,
 				FADA7F1D2838C39A00916152 /* metaring.xcdatamodeld in Sources */,
 				FA191D5228390786006AA2CF /* DashboardChartView.swift in Sources */,
+				08CA5E0D296946A90071ADDC /* RequestAllSensorDataHelper.swift in Sources */,
 				FAFE576D283A6B8A004F151D /* SensorRequestHelper.swift in Sources */,
 				FADA7F932838FD9D00916152 /* MultiLineChartView.swift in Sources */,
 				FA3E77D32854B91F00520712 /* DetailButtonView.swift in Sources */,
@@ -446,6 +461,7 @@
 				FAFE5764283A4C90004F151D /* SensorHelper.swift in Sources */,
 				FAFE5762283A49B6004F151D /* ModelHelper.swift in Sources */,
 				FAFE5760283A3872004F151D /* SensorModel.swift in Sources */,
+				08CA5E112969532D0071ADDC /* AbsResponseModel.swift in Sources */,
 				FADA7F112838C39500916152 /* metaringApp.swift in Sources */,
 				FAFE5769283A5799004F151D /* TabBarView.swift in Sources */,
 				FAFE5767283A54ED004F151D /* DashboardViewModel.swift in Sources */,

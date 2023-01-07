@@ -77,4 +77,10 @@ extension Date {
         
         return dayName
     }
+    
+    func getHoursInDay(date: Date) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        _ = dateFormatter.string(from: date)
+    }
 }

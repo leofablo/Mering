@@ -28,22 +28,35 @@ class DashboardViewModel: ObservableObject {
     
     @Published var requestSensor: [RequestSensorModel] = []
     
-//    @Published var labelEntries: [String] = ["06.00", "07.00", "08.00", "09.00", "10.00", "11.00", "12.00", "15.00"]
-//    @Published var labelEntries: [String] = ["10.00", "11.00", "12.00", "13.00", "14.00", "15.00", "16.00", "17.00"]
     @Published var labelEntries: [String] = []
     @Published var metalContentEntries: [ChartDataEntry] = []
     @Published var waterPHEntries: [ChartDataEntry] = []
     @Published var waterTurbidityEntries: [ChartDataEntry] = []
     @Published var waterDebitEntries: [ChartDataEntry] = []
     
-    init() {
+    @Published var isMetalShow: Bool
+    @Published var isWaterPHShow: Bool
+    @Published var isWaterTurbidityShow: Bool
+    @Published var isWaterDebitShow: Bool
+    
+    init(isMetalShow: Bool = true,
+         isWaterPHShow: Bool = true,
+         isWaterTurbidityShow: Bool = true,
+         isWaterDebitShow: Bool = true) {
+        self.isMetalShow = isMetalShow
+        self.isWaterPHShow = isWaterPHShow
+        self.isWaterTurbidityShow = isWaterTurbidityShow
+        self.isWaterDebitShow = isWaterDebitShow
+        
         self.date = setupDateNow()
         self.sensor = setupSensor()
         if self.sensor.count != 0 {
             setLastDateDashboard()
-//            setDashboardDataEntry()
             groupData(groupBy: "date")
         }
+        
+//        let requestAll = RequestAllSensorData()
+//        requestAll.getAllData()
     }
     
     func groupData(groupBy: String) {
@@ -51,8 +64,13 @@ class DashboardViewModel: ObservableObject {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat =  "yyyy-MM-dd"
             let dictionary = Dictionary(grouping: self.sensor, by: { (element: SensorModel) in
-                return dateFormatter.string(from: element.createTime)
+                let date_a = element.time
+                let newDateFormatter = DateFormatter()
+                newDateFormatter.dateFormat =  "yyyymmdd'T'HHmmss"
+                let newDate = newDateFormatter.date(from: date_a)
+                return dateFormatter.string(from: newDate ?? Date())
             })
+            
             let last7Days = Date.getDates(forLastNDays: 7)
             var countData = 1
             for day in last7Days {
@@ -60,20 +78,20 @@ class DashboardViewModel: ObservableObject {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 let dateNow = dateFormatter.date(from: day)
-                
+
                 dateFormatter.dateFormat = "EE"
                 stringDate = dateFormatter.string(from: dateNow!)
                 self.labelEntries.append(stringDate)
-                
+
                 if (dictionary[day] != nil) {
                     let listDetailDay =  dictionary[day] ?? []
                     let totalDetail = listDetailDay.count
-                    
+
                     var sumMetalContent: Double = 0
                     var sumWaterPH: Double = 0
                     var sumWaterTurbidity: Double = 0
                     var sumWaterDebit: Double = 0
-                    
+
                     for detailDay in listDetailDay {
                         sumMetalContent += detailDay.metalContent
                         sumWaterPH += detailDay.waterPH
@@ -81,18 +99,47 @@ class DashboardViewModel: ObservableObject {
                         sumWaterDebit += detailDay.waterDebit
                     }
                     
-                    self.metalContentEntries.append(
-                        ChartDataEntry(x: Double(countData), y: sumMetalContent/Double(totalDetail))
-                    )
-                    self.waterPHEntries.append(
-                        ChartDataEntry(x: Double(countData), y: sumWaterPH/Double(totalDetail))
-                    )
-                    self.waterTurbidityEntries.append(
-                        ChartDataEntry(x: Double(countData), y: sumWaterTurbidity/Double(totalDetail))
-                    )
-                    self.waterDebitEntries.append(
-                        ChartDataEntry(x: Double(countData), y: sumWaterDebit/Double(totalDetail))
-                    )
+                    if self.isMetalShow {
+                        self.metalContentEntries.append(
+                            ChartDataEntry(x: Double(countData), y: sumMetalContent/Double(totalDetail))
+                        )
+                    } else {
+                        self.metalContentEntries.append(
+                            ChartDataEntry(x: Double(countData), y: Double(0))
+                        )
+                    }
+                    
+                    if self.isWaterPHShow {
+                        self.waterPHEntries.append(
+                            ChartDataEntry(x: Double(countData), y: sumWaterPH/Double(totalDetail))
+                        )
+                    } else {
+                        self.waterPHEntries.append(
+                            ChartDataEntry(x: Double(countData), y: Double(0))
+                        )
+                        
+                    }
+                    
+                    if self.isWaterTurbidityShow {
+                        self.waterTurbidityEntries.append(
+                            ChartDataEntry(x: Double(countData), y: sumWaterTurbidity/Double(totalDetail))
+                        )
+                    } else {
+                        self.waterTurbidityEntries.append(
+                            ChartDataEntry(x: Double(countData), y: Double(0))
+                        )
+                    }
+                    
+                    if self.isWaterDebitShow {
+                        self.waterDebitEntries.append(
+                            ChartDataEntry(x: Double(countData), y: sumWaterDebit/Double(totalDetail))
+                        )
+                    } else {
+                        self.waterDebitEntries.append(
+                            ChartDataEntry(x: Double(countData), y: Double(0))
+                        )
+                    }
+                    
                 } else {
                     self.metalContentEntries.append(
                         ChartDataEntry(x: Double(countData), y: Double(0))
@@ -110,6 +157,7 @@ class DashboardViewModel: ObservableObject {
                 countData += 1
             }
         }
+        
     }
     
     func setLastDateDashboard() {
@@ -185,6 +233,11 @@ class DashboardViewModel: ObservableObject {
     }
     
     func setupSensor() -> Array<SensorModel> {
+        
+//        let sensorData = MetaringCoreDataManager.shared.getAllDataSensor()
+//        print(sensorData)
+        
         return MetaringCoreDataManager.shared.getAllDataSensor()
+//        return Array()
     }
 }
