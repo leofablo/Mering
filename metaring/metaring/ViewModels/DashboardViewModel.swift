@@ -233,11 +233,6 @@ class DashboardViewModel: ObservableObject {
     }
     
     func setupSensor() -> Array<SensorModel> {
-        
-//        let sensorData = MetaringCoreDataManager.shared.getAllDataSensor()
-//        print(sensorData)
-        
         return MetaringCoreDataManager.shared.getAllDataSensor()
-//        return Array()
     }
 }

@@ -113,6 +113,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		084CA26B296A333600FDF37A /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				FA191D5128390786006AA2CF /* DashboardChartView.swift */,
+				FADA7F922838FD9D00916152 /* MultiLineChartView.swift */,
+				08CA5E12296983F50071ADDC /* HistoryChartView.swift */,
+				08CA5E14296988BC0071ADDC /* OneLineChartView.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		084CA26C296A335D00FDF37A /* Partials */ = {
+			isa = PBXGroup;
+			children = (
+				FADA7F7D2838D88500916152 /* DashboardButtonView.swift */,
+				FADA7F822838EFB700916152 /* DashboardHeaderView.swift */,
+				FAFE5768283A5799004F151D /* TabBarView.swift */,
+				FA3E77D42855BC7500520712 /* PullRefreshView.swift */,
+				FA3E77D22854B91F00520712 /* DetailButtonView.swift */,
+			);
+			path = Partials;
+			sourceTree = "<group>";
+		};
 		FADA7F042838C39500916152 = {
 			isa = PBXGroup;
 			children = (
@@ -177,17 +200,10 @@
 		FADA7F7A2838D7F500916152 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				084CA26C296A335D00FDF37A /* Partials */,
+				084CA26B296A333600FDF37A /* Charts */,
 				FADA7F7B2838D81400916152 /* DashboardView.swift */,
-				FADA7F7D2838D88500916152 /* DashboardButtonView.swift */,
-				FADA7F822838EFB700916152 /* DashboardHeaderView.swift */,
-				FA191D5128390786006AA2CF /* DashboardChartView.swift */,
-				FADA7F922838FD9D00916152 /* MultiLineChartView.swift */,
-				FAFE5768283A5799004F151D /* TabBarView.swift */,
 				FAFE576A283A57FC004F151D /* HistoryView.swift */,
-				FA3E77D22854B91F00520712 /* DetailButtonView.swift */,
-				FA3E77D42855BC7500520712 /* PullRefreshView.swift */,
-				08CA5E12296983F50071ADDC /* HistoryChartView.swift */,
-				08CA5E14296988BC0071ADDC /* OneLineChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
