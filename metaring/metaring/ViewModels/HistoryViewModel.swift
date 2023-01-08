@@ -37,8 +37,6 @@ class HistoryViewModel: ObservableObject {
     @Published var isWaterTurbidityShow: Bool
     @Published var isWaterDebitShow: Bool
     
-//    @Published var
-    
     init(isMetalShow: Bool = true,
          isWaterPHShow: Bool = true,
          isWaterTurbidityShow: Bool = true,
@@ -48,24 +46,29 @@ class HistoryViewModel: ObservableObject {
         self.isWaterTurbidityShow = isWaterTurbidityShow
         self.isWaterDebitShow = isWaterDebitShow
         
-        self.date = setupDateNow()
-        self.sensor = setupSensor()
+        self.fetch()
         if self.sensor.count != 0 {
-            setLastDateDashboard()
-            groupData()
+            mappingData()
         }
     }
     
-    func groupData() {
-        self.sensor = self.get7IndividualSensorDatas()
+    func mappingData() {
         var countData = 1
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-YY HH:mm:ss" //dd-MM-YY HH:mm:ss
+        
+        self.labelEntries = []
+        self.metalContentEntries = []
+        self.waterPHEntries = []
+        self.waterTurbidityEntries = []
+        self.waterDebitEntries = []
         
         for sensorData in self.sensor {
             self.labelEntries.append(dateFormatter.string(from: sensorData.time))
 
             if self.isMetalShow {
+                // let rawMetalValue = Double(sensorData.metalContent)
+                // var metalValue = (rawMetalValue * 100).rounded()
                 self.metalContentEntries.append(
                     ChartDataEntry(x: Double(countData), y: Double(sensorData.metalContent))
                 )
@@ -111,13 +114,6 @@ class HistoryViewModel: ObservableObject {
         }
     }
     
-    func setLastDateDashboard() {
-        self.waterDebitValue = self.sensor.last?.waterDebit ??  0
-        self.metalContentValue = self.sensor.last?.metalContent ?? 0
-        self.waterPHValue = self.sensor.last?.waterPH ?? 0
-        self.waterTurbidityValue = self.sensor.last?.waterTurbidity ?? 0
-    }
-    
     func setDashboardDataEntry() {
         var counter: Double = 0
         for data in self.sensor {
@@ -148,16 +144,8 @@ class HistoryViewModel: ObservableObject {
     }
     
     func fetch() {
-        self.sensor = MetaringCoreDataManager.shared.getAllDataSensor()
-    }
-    
-    func format_model_request_value(data: Any) -> Double {
-        var result: Double = 0
-        guard let data_value = data as? String else {
-            return 0
-        }
-        result = Double(data_value) ?? 0
-        return result
+        self.sensor = MetaringCoreDataManager.shared.getLimOffsetData()
+        mappingData()
     }
     
     func create(model: RequestSensorModel) {
@@ -169,9 +157,9 @@ class HistoryViewModel: ObservableObject {
             let sensor = Sensor(context: MetaringCoreDataManager.shared.viewContext)
             sensor.create_time = Date()
             sensor.resource_id = model.ri
-            
+
             sensor.time = newDate
-            
+
             sensor.url = model.pi
             sensor.metal_content = format_model_request_value(data: model.con["metal_content"] as Any)
             sensor.water_turbidity = format_model_request_value(data: model.con["turbidity"] as Any)
@@ -180,23 +168,28 @@ class HistoryViewModel: ObservableObject {
             MetaringCoreDataManager.shared.save()
         }
         
+//        let sensor = Sensor(context: MetaringCoreDataManager.shared.viewContext)
+//        sensor.create_time = Date()
+//        sensor.resource_id = model.ri
+//        
+//        sensor.time = newDate
+//        
+//        sensor.url = model.pi
+//        sensor.metal_content = format_model_request_value(data: model.con["metal_content"] as Any)
+//        sensor.water_turbidity = format_model_request_value(data: model.con["turbidity"] as Any)
+//        sensor.water_ph = format_model_request_value(data: model.con["ph"] as Any)
+//        sensor.water_debit = format_model_request_value(data:  model.con["debit"] as Any)
+//        MetaringCoreDataManager.shared.save()
+        
         fetch()
     }
     
-    func setupDateNow() -> String {
-        var stringDate = ""
-        let dateNow = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EE, dd MMM y"
-        stringDate = dateFormatter.string(from: dateNow)
-        return stringDate
-    }
-    
-    func setupSensor() -> Array<SensorModel> {
-        return MetaringCoreDataManager.shared.getAllDataSensor()
-    }
-    
-    func get7IndividualSensorDatas() -> [SensorModel] {
-        return MetaringCoreDataManager.shared.getLimOffsetData()
+    func format_model_request_value(data: Any) -> Double {
+        var result: Double = 0
+        guard let data_value = data as? String else {
+            return 0
+        }
+        result = Double(data_value) ?? 0
+        return result
     }
 }

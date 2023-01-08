@@ -43,25 +43,12 @@ extension MetaringCoreDataManager {
         let request: NSFetchRequest<Sensor> = Sensor.fetchRequest()
         let sort = NSSortDescriptor(key: #keyPath(Sensor.time), ascending: false)
         
-        request.fetchLimit = 7
-        request.fetchOffset = 7
+        request.fetchLimit = 10
+        request.fetchOffset = 10
         request.sortDescriptors = [sort]
         
         do {
               return try viewContext.fetch(request).map(SensorModel.init)
-//            let rawData: [SensorModel] = try viewContext.fetch(request).map(SensorModel.init)
-//            var limitData: [SensorModel] = []
-//            for sensorData in rawData {
-//                if limitData.count < limit {
-//                    limitData.append(sensorData)
-//                }
-//
-//                if limitData.count > limit {
-//                    break
-//                }
-//            }
-//
-//            return limitData
         } catch {
             return []
         }

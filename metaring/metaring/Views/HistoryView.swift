@@ -25,12 +25,16 @@ struct HistoryView: View {
         self.isRefreshing = false
     }
     
+    func nextDate() {
+       print("next")
+    }
+    
     var body: some View {
         GeometryReader(content: { geometry in
             ScrollView {
                 PullRefreshView(isRefreshing: $isRefreshing, coordinateSpaceName: "pullToRefresh") {
                     fetchOrders()
-                }.padding(.top, -65)
+                }.padding(.top, -68)
                 VStack {
                     HStack {}
                     .frame(width: geometry.self.size.width, height: 10)
@@ -90,8 +94,8 @@ struct HistoryView: View {
                         }
                     }
                     
-                    HStack {
-                    }
+                    HStack {}
+                    
                     .frame(width: geometry.self.size.width, height: 10)
                     .background(Color.clear)
                     

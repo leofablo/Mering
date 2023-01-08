@@ -55,8 +55,8 @@ class DashboardViewModel: ObservableObject {
             groupData(groupBy: "date")
         }
         
-        // let requestAll = RequestAllSensorData()
-        // requestAll.getAllData()
+//         let requestAll = RequestAllSensorData()
+//         requestAll.getAllData()
     }
     
     func groupData(groupBy: String) {
@@ -240,12 +240,5 @@ class DashboardViewModel: ObservableObject {
     
     func setupSensor() -> Array<SensorModel> {
         return MetaringCoreDataManager.shared.getAllDataSensor()
-    }
-    
-    func get7IndividualSensorDatas() {
-        let rawSensorData: [SensorModel] = MetaringCoreDataManager.shared.getLimOffsetData()
-    
-        print(rawSensorData)
-        
     }
 }
