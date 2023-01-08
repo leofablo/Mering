@@ -142,7 +142,6 @@ struct DashboardView: View {
                         
                     }
                     .background(MetaringAssets.mainBackgroundColor)
-//                    .navigationTitle("Dashboard")
                     .navigationBarTitleDisplayMode(.inline)
                 }
                 .background(
@@ -151,7 +150,7 @@ struct DashboardView: View {
                             metalContentActive: $metalContentActive,
                             waterPHActive: $waterPHActive,
                             waterTurbidityActive: $waterTurbidityActive,
-                            waterDebitActive: $waterDebitActive).environmentObject(dashboard),
+                            waterDebitActive: $waterDebitActive),
                         isActive: $isDetailOpened) {
                             EmptyView()
                     }

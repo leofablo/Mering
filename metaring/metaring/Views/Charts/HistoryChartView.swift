@@ -2,14 +2,13 @@
 //  HistoryChartView.swift
 //  metaring
 //
-//  Created by Raja Azian on 07/01/23.
 //
 
 import SwiftUI
 import Charts
 
 struct HistoryChartView: View {
-    @EnvironmentObject var dashboard: DashboardViewModel
+    @EnvironmentObject var historyViewModel: HistoryViewModel
     var isMetalShow: Bool
     var isWaterPHShow: Bool
     var isWaterTurbidityShow: Bool
@@ -26,32 +25,32 @@ struct HistoryChartView: View {
         if self.isMetalShow {
             VStack {
                 OneLineChartView(
-                    entries1: dashboard.metalContentEntries,
-                    labels: dashboard.labelEntries, color: "metalContent")
+                    entries1: historyViewModel.metalContentEntries,
+                    labels: historyViewModel.labelEntries, color: "metalContent")
             }
         }
         
         if self.isWaterPHShow {
             VStack {
                 OneLineChartView(
-                    entries1: dashboard.waterPHEntries,
-                    labels: dashboard.labelEntries, color: "waterPH")
+                    entries1: historyViewModel.waterPHEntries,
+                    labels: historyViewModel.labelEntries, color: "waterPH")
             }
         }
         
         if self.isWaterDebitShow {
             VStack {
                 OneLineChartView(
-                    entries1: dashboard.waterDebitEntries,
-                    labels: dashboard.labelEntries, color: "waterDebit")
+                    entries1: historyViewModel.waterDebitEntries,
+                    labels: historyViewModel.labelEntries, color: "waterDebit")
             }
         }
         
         if self.isWaterTurbidityShow {
             VStack {
                 OneLineChartView(
-                    entries1: dashboard.waterTurbidityEntries,
-                    labels: dashboard.labelEntries, color: "waterTurbidity")
+                    entries1: historyViewModel.waterTurbidityEntries,
+                    labels: historyViewModel.labelEntries, color: "waterTurbidity")
             }
         }
     }

@@ -71,6 +71,7 @@ struct AntaresSensorRequest {
                 semaphore.signal()
                 return
             }
+            
             let stringData = String(data: data, encoding: .utf8)!
             let formatResult = setupFormatResult(stringData: stringData)
             let formatSensorResult = setupFormatSensorResult(sensorData: formatResult["con"]! as AnyObject)

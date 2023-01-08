@@ -12,6 +12,7 @@ struct PullRefreshView: View {
     var coordinateSpaceName: String
     var onRefresh: ()-> Void
     @State var needRefresh: Bool = false
+    @State var paddingTopState: CGFloat = CGFloat(-50)
     
     var body: some View {
         GeometryReader { geo in
@@ -44,6 +45,6 @@ struct PullRefreshView: View {
                 }
                 Spacer()
             }
-        }.padding(.top, isRefreshing ? 0 : -50)
+        }.padding(.top, isRefreshing ? 0 : paddingTopState)
     }
 }

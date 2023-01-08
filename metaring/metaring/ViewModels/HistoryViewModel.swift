@@ -1,15 +1,13 @@
 //
-//  DashboardViewModel.swift
+//  HistoryViewModel.swift
 //  metaring
-//
-//  Created by Rinaldi on 22/05/22.
 //
 
 import Foundation
 import CoreData
 import Charts
 
-class DashboardViewModel: ObservableObject {
+class HistoryViewModel: ObservableObject {
     @Published var sensor: [SensorModel] = []
     @Published var date: String = ""
     @Published var detailSelected = 0
@@ -39,6 +37,8 @@ class DashboardViewModel: ObservableObject {
     @Published var isWaterTurbidityShow: Bool
     @Published var isWaterDebitShow: Bool
     
+//    @Published var
+    
     init(isMetalShow: Bool = true,
          isWaterPHShow: Bool = true,
          isWaterTurbidityShow: Bool = true,
@@ -52,109 +52,63 @@ class DashboardViewModel: ObservableObject {
         self.sensor = setupSensor()
         if self.sensor.count != 0 {
             setLastDateDashboard()
-            groupData(groupBy: "date")
+            groupData()
         }
-        
-        // let requestAll = RequestAllSensorData()
-        // requestAll.getAllData()
     }
     
-    func groupData(groupBy: String) {
-        if groupBy == "date" {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat =  "yyyy-MM-dd"
-            let dictionary = Dictionary(grouping: self.sensor, by: { (element: SensorModel) in
-                return dateFormatter.string(from: element.time )
-            })
-            
-            let last7Days = Date.getDates(forLastNDays: 7)
-            var countData = 1
-            for day in last7Days {
-                var stringDate = ""
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let dateNow = dateFormatter.date(from: day)
-
-                dateFormatter.dateFormat = "EE"
-                stringDate = dateFormatter.string(from: dateNow!)
-                self.labelEntries.append(stringDate)
-
-                if (dictionary[day] != nil) {
-                    let listDetailDay =  dictionary[day] ?? []
-                    let totalDetail = listDetailDay.count
-
-                    var sumMetalContent: Double = 0
-                    var sumWaterPH: Double = 0
-                    var sumWaterTurbidity: Double = 0
-                    var sumWaterDebit: Double = 0
-
-                    for detailDay in listDetailDay {
-                        sumMetalContent += detailDay.metalContent
-                        sumWaterPH += detailDay.waterPH
-                        sumWaterTurbidity += detailDay.waterTurbidity
-                        sumWaterDebit += detailDay.waterDebit
-                    }
-                    
-                    if self.isMetalShow {
-                        
-                        self.metalContentEntries.append(
-                            ChartDataEntry(x: Double(countData), y: sumMetalContent/Double(totalDetail))
-                        )
-                    } else {
-                        self.metalContentEntries.append(
-                            ChartDataEntry(x: Double(countData), y: Double(0))
-                        )
-                    }
-                    
-                    if self.isWaterPHShow {
-                        self.waterPHEntries.append(
-                            ChartDataEntry(x: Double(countData), y: sumWaterPH/Double(totalDetail))
-                        )
-                    } else {
-                        self.waterPHEntries.append(
-                            ChartDataEntry(x: Double(countData), y: Double(0))
-                        )
-                        
-                    }
-                    
-                    if self.isWaterTurbidityShow {
-                        self.waterTurbidityEntries.append(
-                            ChartDataEntry(x: Double(countData), y: sumWaterTurbidity/Double(totalDetail))
-                        )
-                    } else {
-                        self.waterTurbidityEntries.append(
-                            ChartDataEntry(x: Double(countData), y: Double(0))
-                        )
-                    }
-                    
-                    if self.isWaterDebitShow {
-                        self.waterDebitEntries.append(
-                            ChartDataEntry(x: Double(countData), y: sumWaterDebit/Double(totalDetail))
-                        )
-                    } else {
-                        self.waterDebitEntries.append(
-                            ChartDataEntry(x: Double(countData), y: Double(0))
-                        )
-                    }
-                    
-                } else {
-                    self.metalContentEntries.append(
-                        ChartDataEntry(x: Double(countData), y: Double(0))
-                    )
-                    self.waterPHEntries.append(
-                        ChartDataEntry(x: Double(countData), y: Double(0))
-                    )
-                    self.waterTurbidityEntries.append(
-                        ChartDataEntry(x: Double(countData), y: Double(0))
-                    )
-                    self.waterDebitEntries.append(
-                        ChartDataEntry(x: Double(countData), y: Double(0))
-                    )
-                }
-                countData += 1
-            }
-        }
+    func groupData() {
+        self.sensor = self.get7IndividualSensorDatas()
+        var countData = 1
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-YY HH:mm:ss" //dd-MM-YY HH:mm:ss
         
+        for sensorData in self.sensor {
+            self.labelEntries.append(dateFormatter.string(from: sensorData.time))
+
+            if self.isMetalShow {
+                self.metalContentEntries.append(
+                    ChartDataEntry(x: Double(countData), y: Double(sensorData.metalContent))
+                )
+            } else {
+                self.metalContentEntries.append(
+                    ChartDataEntry(x: Double(countData), y: Double(0))
+                )
+            }
+
+            if self.isWaterPHShow {
+                self.waterPHEntries.append(
+                    ChartDataEntry(x: Double(countData), y: Double(sensorData.waterPH))
+                )
+            } else {
+                self.waterPHEntries.append(
+                    ChartDataEntry(x: Double(countData), y: Double(0))
+                )
+
+            }
+
+            if self.isWaterTurbidityShow {
+                self.waterTurbidityEntries.append(
+                    ChartDataEntry(x: Double(countData), y: Double(sensorData.waterTurbidity))
+                )
+            } else {
+                self.waterTurbidityEntries.append(
+                    ChartDataEntry(x: Double(countData), y: Double(0))
+                )
+            }
+
+            if self.isWaterDebitShow {
+                self.waterDebitEntries.append(
+                    ChartDataEntry(x: Double(countData), y: Double(sensorData.waterDebit))
+                )
+            } else {
+                self.waterDebitEntries.append(
+                    ChartDataEntry(x: Double(countData), y: Double(0))
+                )
+            }
+            
+            countData += 1
+
+        }
     }
     
     func setLastDateDashboard() {
@@ -242,10 +196,7 @@ class DashboardViewModel: ObservableObject {
         return MetaringCoreDataManager.shared.getAllDataSensor()
     }
     
-    func get7IndividualSensorDatas() {
-        let rawSensorData: [SensorModel] = MetaringCoreDataManager.shared.getLimOffsetData()
-    
-        print(rawSensorData)
-        
+    func get7IndividualSensorDatas() -> [SensorModel] {
+        return MetaringCoreDataManager.shared.getLimOffsetData()
     }
 }

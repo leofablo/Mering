@@ -46,7 +46,7 @@ struct SensorModel {
     var createTime: Date {
         return sensor.create_time ?? Date()
     }
-    var time: String {
-        return sensor.time ?? ""
+    var time: Date {
+        return sensor.time ?? Date()
     }
 }

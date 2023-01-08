@@ -10,19 +10,29 @@ import Charts
 
 struct HistoryView: View {
     @State private var filterBy = 0
-    @EnvironmentObject var dashboard: DashboardViewModel
+    @StateObject var historyViewModel: HistoryViewModel = HistoryViewModel()
     
     @Binding var metalContentActive: Bool
     @Binding var waterPHActive: Bool
     @Binding var waterTurbidityActive: Bool
     @Binding var waterDebitActive: Bool
     
+    @State var isRefreshing: Bool = false
+    
+    func fetchOrders() {
+        self.isRefreshing = true
+        historyViewModel.getLastDataSensor()
+        self.isRefreshing = false
+    }
+    
     var body: some View {
         GeometryReader(content: { geometry in
             ScrollView {
+                PullRefreshView(isRefreshing: $isRefreshing, coordinateSpaceName: "pullToRefresh") {
+                    fetchOrders()
+                }.padding(.top, -65)
                 VStack {
-                    HStack {
-                    }
+                    HStack {}
                     .frame(width: geometry.self.size.width, height: 10)
                     .background(Color.clear)
                     
@@ -87,7 +97,7 @@ struct HistoryView: View {
                     
                     if self.metalContentActive {
                         VStack {
-                            HistoryChartView(isMetalShow: true, isWaterPHShow: false, isWaterTurbidityShow: false, isWaterDebitShow: false).environmentObject(dashboard)
+                            HistoryChartView(isMetalShow: true, isWaterPHShow: false, isWaterTurbidityShow: false, isWaterDebitShow: false).environmentObject(historyViewModel)
                                 .frame(height: 400)
                             
                         }
@@ -95,7 +105,7 @@ struct HistoryView: View {
                     
                     if self.waterPHActive {
                         VStack {
-                            HistoryChartView(isMetalShow: false, isWaterPHShow: true, isWaterTurbidityShow: false, isWaterDebitShow: false).environmentObject(dashboard)
+                            HistoryChartView(isMetalShow: false, isWaterPHShow: true, isWaterTurbidityShow: false, isWaterDebitShow: false).environmentObject(historyViewModel)
                                 .frame(height: 400)
                             
                         }
@@ -103,7 +113,7 @@ struct HistoryView: View {
                     
                     if self.waterTurbidityActive {
                         VStack {
-                            HistoryChartView(isMetalShow: false, isWaterPHShow: false, isWaterTurbidityShow: true, isWaterDebitShow: false).environmentObject(dashboard)
+                            HistoryChartView(isMetalShow: false, isWaterPHShow: false, isWaterTurbidityShow: true, isWaterDebitShow: false).environmentObject(historyViewModel)
                                 .frame(height: 400)
                             
                         }
@@ -111,7 +121,7 @@ struct HistoryView: View {
                     
                     if self.waterDebitActive {
                         VStack {
-                            HistoryChartView(isMetalShow: false, isWaterPHShow: false, isWaterTurbidityShow: false, isWaterDebitShow: true).environmentObject(dashboard)
+                            HistoryChartView(isMetalShow: false, isWaterPHShow: false, isWaterTurbidityShow: false, isWaterDebitShow: true).environmentObject(historyViewModel)
                                 .frame(height: 400)
                             
                         }
@@ -119,8 +129,9 @@ struct HistoryView: View {
                     
                 }
                 .navigationTitle("History")
-            .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.inline)
             }
+            .coordinateSpace(name: "pullToRefresh")
         })
     }
 }

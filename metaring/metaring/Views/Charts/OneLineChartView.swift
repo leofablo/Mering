@@ -2,7 +2,6 @@
 //  MultiLineChartView.swift
 //  metaring
 //
-//  Created by Rinaldi on 21/05/22.
 //
 
 import SwiftUI
@@ -25,21 +24,21 @@ struct OneLineChartView : UIViewRepresentable {
     func createChart(chart: LineChartView) -> LineChartView{
         chart.chartDescription.enabled = false
         chart.xAxis.drawGridLinesEnabled = true
-//        chart.borderLineWidth = 1
+        chart.borderLineWidth = 1
         chart.xAxis.drawLabelsEnabled = true
         chart.xAxis.drawAxisLineEnabled = true
         chart.xAxis.labelPosition = .bottom
         chart.leftAxis.labelPosition = .outsideChart
-        chart.xAxis.labelRotationAngle = CGFloat(315)
+        chart.xAxis.labelRotationAngle = CGFloat(270)
         chart.rightAxis.enabled = false
-//        chart.drawBordersEnabled = true
+        chart.drawBordersEnabled = true
         chart.drawMarkers = true
         chart.legend.form = .none
         chart.xAxis.labelCount = labels.count
         chart.xAxis.forceLabelsEnabled = true
         chart.xAxis.granularityEnabled = true
         chart.xAxis.granularity = 1.0
-        chart.xAxis.valueFormatter = CustomChartFormatter(labels: labels) as any AxisValueFormatter
+        chart.xAxis.valueFormatter = OneLineCustomChartFormatter(labels: labels) as any AxisValueFormatter
         chart.data = addData()
         return chart
     }
@@ -82,4 +81,14 @@ struct OneLineChartView : UIViewRepresentable {
         return dataSet
     }
 
+}
+
+class OneLineCustomChartFormatter: NSObject, AxisValueFormatter {
+    var labels: [String]
+    init(labels: [String]) {
+        self.labels = labels
+    }
+    public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return labels[Int(value - 1)]
+    }
 }
