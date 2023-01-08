@@ -12,7 +12,7 @@ import FoundationNetworking
 import CoreData
 
 struct RequestAllSensorData {
-    var semaphore = DispatchSemaphore (value: 1)
+    var semaphore = DispatchSemaphore (value: 6)
     
     var domainUrl = "https://platform.antares.id"
     var port = "8443"

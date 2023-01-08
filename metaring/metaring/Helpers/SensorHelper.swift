@@ -39,16 +39,16 @@ extension MetaringCoreDataManager {
         }
     }
     
-    func getLimOffsetData(limit: Int = 7, offset: Int = 7) -> [SensorModel] {
+    func getLimOffsetData(limit: Int = 10, offset: Int = 10) -> [SensorModel] {
         let request: NSFetchRequest<Sensor> = Sensor.fetchRequest()
         let sort = NSSortDescriptor(key: #keyPath(Sensor.time), ascending: false)
         
-        request.fetchLimit = 10
-        request.fetchOffset = 10
         request.sortDescriptors = [sort]
+        request.fetchLimit = limit
+        request.fetchOffset = limit
         
         do {
-              return try viewContext.fetch(request).map(SensorModel.init)
+            return try viewContext.fetch(request).map(SensorModel.init).sorted { $0.time < $1.time }
         } catch {
             return []
         }
@@ -56,8 +56,6 @@ extension MetaringCoreDataManager {
     
     func isDataByDateExists(date: Date) -> Bool {
         let request: NSFetchRequest<Sensor> = Sensor.fetchRequest()
-        let sort = NSSortDescriptor(key: #keyPath(Sensor.time), ascending: false)
-        request.sortDescriptors = [sort]
         
         do {
             let sensorDatas = try viewContext.fetch(request).map(SensorModel.init)

@@ -211,7 +211,9 @@ class DashboardViewModel: ObservableObject {
         dateFormmater.dateFormat =  "yyyymmdd'T'HHmmss"
         let newDate = dateFormmater.date(from: model.ct)
         
-        if MetaringCoreDataManager.shared.isDataByDateExists(date: newDate!) { } else {
+        if MetaringCoreDataManager.shared.isDataByDateExists(date: newDate!) {
+            print("date exists")
+        } else {
             let sensor = Sensor(context: MetaringCoreDataManager.shared.viewContext)
             sensor.create_time = Date()
             sensor.resource_id = model.ri

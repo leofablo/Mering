@@ -46,16 +46,15 @@ class HistoryViewModel: ObservableObject {
         self.isWaterTurbidityShow = isWaterTurbidityShow
         self.isWaterDebitShow = isWaterDebitShow
         
-        self.fetch()
-        if self.sensor.count != 0 {
-            mappingData()
-        }
+        self.mappingData()
     }
     
     func mappingData() {
         var countData = 1
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-YY HH:mm:ss" //dd-MM-YY HH:mm:ss
+        
+        self.sensor = MetaringCoreDataManager.shared.getLimOffsetData()
         
         self.labelEntries = []
         self.metalContentEntries = []
@@ -64,11 +63,10 @@ class HistoryViewModel: ObservableObject {
         self.waterDebitEntries = []
         
         for sensorData in self.sensor {
+            
             self.labelEntries.append(dateFormatter.string(from: sensorData.time))
 
             if self.isMetalShow {
-                // let rawMetalValue = Double(sensorData.metalContent)
-                // var metalValue = (rawMetalValue * 100).rounded()
                 self.metalContentEntries.append(
                     ChartDataEntry(x: Double(countData), y: Double(sensorData.metalContent))
                 )
@@ -114,74 +112,50 @@ class HistoryViewModel: ObservableObject {
         }
     }
     
-    func setDashboardDataEntry() {
-        var counter: Double = 0
-        for data in self.sensor {
-            counter += 1
-            self.metalContentEntries.append(
-                ChartDataEntry(x: Double(counter), y: data.metalContent)
-            )
-            
-            self.waterPHEntries.append(
-                ChartDataEntry(x: Double(counter), y: data.waterPH)
-            )
-
-            self.waterTurbidityEntries.append(
-                ChartDataEntry(x: Double(counter), y: data.waterTurbidity)
-            )
-
-            self.waterDebitEntries.append(
-                ChartDataEntry(x: Double(counter), y: data.waterDebit)
-            )
-        }
-    }
-    
     func getLastDataSensor() {
         let requestModel: RequestSensorModel = AntaresSensorRequest.init(semaphore: DispatchSemaphore(value: 0)).getLastData()
         if  requestModel.status {
-            create(model: requestModel)
+            self.create(model: requestModel)
         }
-    }
-    
-    func fetch() {
-        self.sensor = MetaringCoreDataManager.shared.getLimOffsetData()
-        mappingData()
     }
     
     func create(model: RequestSensorModel) {
         let dateFormmater = DateFormatter()
         dateFormmater.dateFormat =  "yyyymmdd'T'HHmmss"
+        
         let newDate = dateFormmater.date(from: model.ct)
         
-        if MetaringCoreDataManager.shared.isDataByDateExists(date: newDate!) { } else {
-            let sensor = Sensor(context: MetaringCoreDataManager.shared.viewContext)
-            sensor.create_time = Date()
-            sensor.resource_id = model.ri
-
-            sensor.time = newDate
-
-            sensor.url = model.pi
-            sensor.metal_content = format_model_request_value(data: model.con["metal_content"] as Any)
-            sensor.water_turbidity = format_model_request_value(data: model.con["turbidity"] as Any)
-            sensor.water_ph = format_model_request_value(data: model.con["ph"] as Any)
-            sensor.water_debit = format_model_request_value(data:  model.con["debit"] as Any)
-            MetaringCoreDataManager.shared.save()
-        }
-        
-//        let sensor = Sensor(context: MetaringCoreDataManager.shared.viewContext)
-//        sensor.create_time = Date()
-//        sensor.resource_id = model.ri
+//        if MetaringCoreDataManager.shared.isDataByDateExists(date: newDate!) {
+//            print("data exists")
+//        } else {
+//            let sensor = Sensor(context: MetaringCoreDataManager.shared.viewContext)
+//            sensor.create_time = Date()
+//            sensor.resource_id = model.ri
 //
-//        sensor.time = newDate
+//            sensor.time = newDate
 //
-//        sensor.url = model.pi
-//        sensor.metal_content = format_model_request_value(data: model.con["metal_content"] as Any)
-//        sensor.water_turbidity = format_model_request_value(data: model.con["turbidity"] as Any)
-//        sensor.water_ph = format_model_request_value(data: model.con["ph"] as Any)
-//        sensor.water_debit = format_model_request_value(data:  model.con["debit"] as Any)
-//        MetaringCoreDataManager.shared.save()
+//            sensor.url = model.pi
+//            sensor.metal_content = format_model_request_value(data: model.con["metal_content"] as Any)
+//            sensor.water_turbidity = format_model_request_value(data: model.con["turbidity"] as Any)
+//            sensor.water_ph = format_model_request_value(data: model.con["ph"] as Any)
+//            sensor.water_debit = format_model_request_value(data:  model.con["debit"] as Any)
+//            MetaringCoreDataManager.shared.save()
+//        }
         
-        fetch()
+        let sensor = Sensor(context: MetaringCoreDataManager.shared.viewContext)
+        sensor.create_time = Date()
+        sensor.resource_id = model.ri
+
+        sensor.time = newDate
+
+        sensor.url = model.pi
+        sensor.metal_content = format_model_request_value(data: model.con["metal_content"] as Any)
+        sensor.water_turbidity = format_model_request_value(data: model.con["turbidity"] as Any)
+        sensor.water_ph = format_model_request_value(data: model.con["ph"] as Any)
+        sensor.water_debit = format_model_request_value(data:  model.con["debit"] as Any)
+        MetaringCoreDataManager.shared.save()
+        
+        self.mappingData()
     }
     
     func format_model_request_value(data: Any) -> Double {

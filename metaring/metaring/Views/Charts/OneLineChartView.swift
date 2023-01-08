@@ -19,6 +19,8 @@ struct OneLineChartView : UIViewRepresentable {
 
     func updateUIView(_ uiView: LineChartView, context: Context) {
         uiView.data = addData()
+        uiView.setNeedsDisplay()
+        uiView.xAxis.valueFormatter = OneLineCustomChartFormatter(labels: labels) as any AxisValueFormatter
     }
 
     func createChart(chart: LineChartView) -> LineChartView{
