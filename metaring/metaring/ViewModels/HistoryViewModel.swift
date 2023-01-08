@@ -171,9 +171,9 @@ class HistoryViewModel: ObservableObject {
 //        let sensor = Sensor(context: MetaringCoreDataManager.shared.viewContext)
 //        sensor.create_time = Date()
 //        sensor.resource_id = model.ri
-//        
+//
 //        sensor.time = newDate
-//        
+//
 //        sensor.url = model.pi
 //        sensor.metal_content = format_model_request_value(data: model.con["metal_content"] as Any)
 //        sensor.water_turbidity = format_model_request_value(data: model.con["turbidity"] as Any)
